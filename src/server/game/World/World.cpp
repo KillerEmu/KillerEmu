@@ -457,6 +457,7 @@ void World::LoadConfigSettings(bool reload)
     rate_values[RATE_DROP_ITEM_REFERENCED] = ConfigMgr::GetFloatDefault("Rate.Drop.Item.Referenced", 1.0f);
     rate_values[RATE_DROP_ITEM_REFERENCED_AMOUNT] = ConfigMgr::GetFloatDefault("Rate.Drop.Item.ReferencedAmount", 1.0f);
     rate_values[RATE_DROP_MONEY]  = ConfigMgr::GetFloatDefault("Rate.Drop.Money", 1.0f);
+	rate_values[RATE_PREMIUM_DROP_MONEY]        = sConfig->GetFloatDefault("Premium.Rate.Drop.Money", 1.0f);
     rate_values[RATE_XP_KILL]     = ConfigMgr::GetFloatDefault("Rate.XP.Kill", 1.0f);
 	rate_values[RATE_XP_KILL_PREMIUM]    = ConfigMgr::GetFloatDefault("Rate.XP.Kill.Premium", 1.0f);
     rate_values[RATE_XP_QUEST]    = ConfigMgr::GetFloatDefault("Rate.XP.Quest", 1.0f);
@@ -927,6 +928,11 @@ void World::LoadConfigSettings(bool reload)
     m_int_configs[CONFIG_SKILL_GAIN_GATHERING]  = ConfigMgr::GetIntDefault("SkillGain.Gathering", 1);
 
     m_int_configs[CONFIG_SKILL_GAIN_WEAPON]  = ConfigMgr::GetIntDefault("SkillGain.Weapon", 1);
+	
+	m_int_configs[CONFIG_SKILL_PREMIUM_GAIN_WEAPON]    = sConfig->GetIntDefault("Premium.SkillGain.Weapon", 1.0f);
+	m_int_configs[CONFIG_SKILL_PREMIUM_GAIN_DEFENSE]   = sConfig->GetIntDefault("Premium.SkillGain.Defense", 1.0f);
+    m_int_configs[CONFIG_SKILL_PREMIUM_GAIN_CRAFTING]  = sConfig->GetIntDefault("Premium.SkillGain.Crafting", 1.0f);
+    m_int_configs[CONFIG_SKILL_PREMIUM_GAIN_GATHERING] = sConfig->GetIntDefault("Premium.SkillGain.Gathering", 1.0f);
 
     m_int_configs[CONFIG_MAX_OVERSPEED_PINGS] = ConfigMgr::GetIntDefault("MaxOverspeedPings", 2);
     if (m_int_configs[CONFIG_MAX_OVERSPEED_PINGS] != 0 && m_int_configs[CONFIG_MAX_OVERSPEED_PINGS] < 2)

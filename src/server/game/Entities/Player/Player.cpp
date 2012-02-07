@@ -5673,7 +5673,8 @@ void Player::LeaveLFGChannel()
 
 void Player::UpdateDefense()
 {
-    uint32 defense_skill_gain = sWorld->getIntConfig(CONFIG_SKILL_GAIN_DEFENSE);
+    //uint32 defense_skill_gain = sWorld->getIntConfig(CONFIG_SKILL_GAIN_DEFENSE);
+	uint32 defense_skill_gain = (GetSession()->IsPremium() != 0 ? sWorld->getIntConfig(CONFIG_SKILL_PREMIUM_GAIN_DEFENSE) : sWorld->getIntConfig(CONFIG_SKILL_GAIN_DEFENSE));
 
     if (UpdateSkill(SKILL_DEFENSE, defense_skill_gain))
     {
@@ -6124,7 +6125,8 @@ bool Player::UpdateCraftSkill(uint32 spellid)
                     learnSpell(discoveredSpell, false);
             }
 
-            uint32 craft_skill_gain = sWorld->getIntConfig(CONFIG_SKILL_GAIN_CRAFTING);
+            //uint32 craft_skill_gain = sWorld->getIntConfig(CONFIG_SKILL_GAIN_CRAFTING);
+			 uint32 craft_skill_gain = (GetSession()->IsPremium() != 0 ? sWorld->getIntConfig(CONFIG_SKILL_PREMIUM_GAIN_CRAFTING) : sWorld->getIntConfig(CONFIG_SKILL_GAIN_CRAFTING));
 
             return UpdateSkillPro(_spell_idx->second->skillId, SkillGainChance(SkillValue,
                 _spell_idx->second->max_value,
@@ -6140,7 +6142,9 @@ bool Player::UpdateGatherSkill(uint32 SkillId, uint32 SkillValue, uint32 RedLeve
 {
     sLog->outDebug(LOG_FILTER_PLAYER_SKILLS, "UpdateGatherSkill(SkillId %d SkillLevel %d RedLevel %d)", SkillId, SkillValue, RedLevel);
 
-    uint32 gathering_skill_gain = sWorld->getIntConfig(CONFIG_SKILL_GAIN_GATHERING);
+    //uint32 gathering_skill_gain = sWorld->getIntConfig(CONFIG_SKILL_GAIN_GATHERING);
+	uint32 gathering_skill_gain = (GetSession()->IsPremium() != 0 ? sWorld->getIntConfig(CONFIG_SKILL_PREMIUM_GAIN_GATHERING) : sWorld->getIntConfig(CONFIG_SKILL_GAIN_GATHERING));
+	
 
     // For skinning and Mining chance decrease with level. 1-74 - no decrease, 75-149 - 2 times, 225-299 - 8 times
     switch (SkillId)
@@ -6172,7 +6176,8 @@ bool Player::UpdateFishingSkill()
 
     int32 chance = SkillValue < 75 ? 100 : 2500/(SkillValue-50);
 
-    uint32 gathering_skill_gain = sWorld->getIntConfig(CONFIG_SKILL_GAIN_GATHERING);
+    //uint32 gathering_skill_gain = sWorld->getIntConfig(CONFIG_SKILL_GAIN_GATHERING);
+	uint32 gathering_skill_gain = (GetSession()->IsPremium() != 0 ? sWorld->getIntConfig(CONFIG_SKILL_PREMIUM_GAIN_GATHERING) : sWorld->getIntConfig(CONFIG_SKILL_GAIN_GATHERING));
 
     return UpdateSkillPro(SKILL_FISHING, chance*10, gathering_skill_gain);
 }
@@ -6254,7 +6259,8 @@ void Player::UpdateWeaponSkill(WeaponAttackType attType)
     if (victim && victim->GetTypeId() == TYPEID_UNIT && (victim->ToCreature()->GetCreatureInfo()->flags_extra & CREATURE_FLAG_EXTRA_NO_SKILLGAIN))
         return;
 
-    uint32 weapon_skill_gain = sWorld->getIntConfig(CONFIG_SKILL_GAIN_WEAPON);
+    //uint32 weapon_skill_gain = sWorld->getIntConfig(CONFIG_SKILL_GAIN_WEAPON);
+	uint32 weapon_skill_gain = (GetSession()->IsPremium() != 0 ? sWorld->getIntConfig(CONFIG_SKILL_PREMIUM_GAIN_WEAPON) : sWorld->getIntConfig(CONFIG_SKILL_GAIN_WEAPON));
 
     Item* tmpitem = GetWeaponForAttack(attType, true);
     if (!tmpitem && attType == BASE_ATTACK)
@@ -14936,7 +14942,8 @@ void Player::RewardQuest(Quest const* quest, uint32 reward, Object* questGiver, 
     if (getLevel() < sWorld->getIntConfig(CONFIG_MAX_PLAYER_LEVEL))
         GiveXP(XP, NULL);
     else
-        moneyRew = int32(quest->GetRewMoneyMaxLevel() * sWorld->getRate(RATE_DROP_MONEY));
+        //moneyRew = int32(quest->GetRewMoneyMaxLevel() * sWorld->getRate(RATE_DROP_MONEY));
+		moneyRew = (GetSession()->IsPremium() != 0 ? int32(pQuest->GetRewMoneyMaxLevel() * sWorld->getRate(RATE_PREMIUM_DROP_MONEY)) : int32(pQuest->GetRewMoneyMaxLevel() * sWorld->getRate(RATE_DROP_MONEY)));
 
     // Give player extra money if GetRewOrReqMoney > 0 and get ReqMoney if negative
     if (quest->GetRewOrReqMoney())
