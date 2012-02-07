@@ -2027,6 +2027,7 @@ Rate.Skill.Discovery = 1
 #                     1 - (Rate.Drop.Item.Artifact)
 #                     1 - (Rate.Drop.Item.Referenced)
 #                     1 - (Rate.Drop.Money)
+#                     1 - (Premium.Rate.Drop.Money)
 
 Rate.Drop.Item.Poor             = 1
 Rate.Drop.Item.Normal           = 1
@@ -2037,6 +2038,8 @@ Rate.Drop.Item.Legendary        = 1
 Rate.Drop.Item.Artifact         = 1
 Rate.Drop.Item.Referenced       = 1
 Rate.Drop.Money                 = 1
+Premium.Rate.Drop.Money         = 1
+
 
 #
 #    Rate.Drop.Item.ReferencedAmount
@@ -2191,11 +2194,19 @@ Rate.InstanceResetTime = 1
 #                     1 - (SkillGain.Defense)
 #                     1 - (SkillGain.Gathering)
 #                     1 - (SkillGain.Weapon)
+#                     1 - (Premium.SkillGain.Crafting)
+#                     1 - (Premium.SkillGain.Defense)
+#                     1 - (Premium.SkillGain.Gathering)
+#                     1 - (Premium.SkillGain.Weapon)
 
 SkillGain.Crafting  = 1
 SkillGain.Defense   = 1
 SkillGain.Gathering = 1
 SkillGain.Weapon    = 1
+Premium.SkillGain.Weapon = 1
+Premium.SkillGain.Defense   = 1
+Premium.SkillGain.Crafting    = 1
+Premium.SkillGain.Gathering = 1
 
 #
 #    SkillChance.Orange
